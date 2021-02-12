@@ -14,11 +14,26 @@
 #' # create some metadata file
 #' library(rdflib)
 #' r <- rdf()
-#' z <- rdf_add(r,
+#' rdf_add(r,
 #'   subject = "http://www.dajobe.org/",
 #'   predicate = "http://purl.org/dc/elements/1.1/language",
 #'   object = "en")
-#' capin_metadata(x, metadata=z)
+#' rdf_add(r,
+#'   subject = "b0",
+#'   predicate = "http://purl.org/dc/elements/1.1/title",
+#'   object = "Dave Beckett's Home Page")
+#' rdf_add(r,
+#'   subject = "b0",
+#'   predicate = "http://purl.org/dc/elements/1.1/title",
+#'   object = "Dave Beckett's Home Page")
+#' rdf_add(r,
+#'   subject = "b0",
+#'   predicate = "http://purl.org/dc/elements/1.1/creator",
+#'   object = "Dave Beckett")
+#' # write metadata to a file
+#' mfile <- capin_metadata(x, metadata=r)
+#' # read back the metadata file
+#' rdflib::rdf_parse(mfile)
 capin_metadata <- function(x, metadata) {
   if (!contentid:::is_hash(x, "hashuri"))
     stop("'x' should be a contentid hash")
