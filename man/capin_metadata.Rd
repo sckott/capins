@@ -4,12 +4,12 @@
 \alias{capin_metadata}
 \title{file metadata}
 \usage{
-capin_metadata(x, metadata)
+capin_metadata(metadata, x)
 }
 \arguments{
-\item{x}{(character) a file path}
-
 \item{metadata}{metadata something or other}
+
+\item{x}{(character) a file path}
 }
 \value{
 file path for the metadata file, containing

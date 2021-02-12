@@ -34,11 +34,21 @@
 #' mfile <- capin_metadata(x, metadata=r)
 #' # read back the metadata file
 #' rdflib::rdf_parse(mfile)
-capin_metadata <- function(x, metadata) {
+capin_metadata <- function(metadata, x) {
+  UseMethod("capin_metadata")
+}
+
+#' @export
+capin_metadata.rdf <- function(metadata, x) {
   if (!contentid:::is_hash(x, "hashuri"))
     stop("'x' should be a contentid hash")
   hex <- last(stract(x, contentid:::hex_regex)[[1]])
   file <- paste0(hex, ".rdf")
   rdflib::rdf_serialize(metadata, file)
   return(file)
+}
+
+#' @export
+capin_metadata.default <- function(metadata, x) {
+  stop("no 'capin_metadata' method for ", class(metadata)[[1L]])
 }

@@ -15,8 +15,26 @@
 #' res <- capin(w)
 #' res
 #' contentid::query_sources(res)
-capin <- function(x) {
-  contentid::register(x)
+#' 
+#' # associate metadata with the data
+#' x <- system.file("extdata", "vostok.icecore.co2", package = "contentid")
+#' m <- system.file("examples/rdf_eg1.rdf", package = "capins")
+#' capin(x, meta = m)
+capin <- function(x, meta = NULL) {
+  stopifnot("metadata must be NULL or character" = 
+    is.character(meta) || is.null(meta) || inherits(meta, "rdf"))
+  tmp <- contentid::register(x)
+  class(tmp) <- "capin"
+  if (!is.null(meta)) {
+    if (is.character(meta)) {
+      stopifnot("file does not exist" = file.exists(meta))
+      mfile <- meta
+    } else {
+      mfile <- capin_metadata(tmp, meta)
+    }
+    attr(tmp, "metadata") <- mfile
+  }
+  return(tmp)
 }
 
 # url <- "https://raw.githubusercontent.com/facebook/prophet/master/examples/example_retail_sales.csv"

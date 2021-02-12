@@ -4,7 +4,7 @@
 \alias{capin}
 \title{file}
 \usage{
-capin(x)
+capin(x, meta = NULL)
 }
 \arguments{
 \item{x}{(character) a file path}
@@ -26,4 +26,9 @@ write.csv(df, file = w)
 res <- capin(w)
 res
 contentid::query_sources(res)
+
+# associate metadata with the data
+x <- system.file("extdata", "vostok.icecore.co2", package = "contentid")
+m <- system.file("examples/rdf_eg1.rdf", package = "capins")
+capin(x, meta = m)
 }
