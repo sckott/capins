@@ -1,0 +1,19 @@
+Package: capins
+Title: Content Addressable Pins
+Description: Content addressable pins.
+Version: 0.0.1.91
+License: MIT + file LICENSE
+Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"), email =
+    "myrmecocystus@gmail.com")
+URL: https://github.com/sckott/capins, https://sckott.github.io/capins/
+BugReports: https://github.com/sckott/capins/issues
+LazyData: true
+Encoding: UTF-8
+Language: en-US
+Roxygen: list(markdown = TRUE)
+Imports:
+    contentid,
+    rdflib
+Suggests:
+    testthat
+RoxygenNote: 7.1.1
