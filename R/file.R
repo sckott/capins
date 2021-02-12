@@ -4,18 +4,18 @@
 #' @examples
 #' # a file that's already on the web
 #' x <- system.file("extdata", "vostok.icecore.co2", package = "contentid")
-#' file(x)
+#' capin(x)
 #' url <- 'https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2'
-#' file(url)
+#' capin(url)
 #' 
 #' # a file not on the web
 #' w <- tempfile(fileext=".csv")
 #' df <- data.frame(a = letters, b = LETTERS)
 #' write.csv(df, file = w)
-#' res <- file(w)
+#' res <- capin(w)
 #' res
 #' contentid::query_sources(res)
-file <- function(x) {
+capin <- function(x) {
   contentid::register(x)
 }
 

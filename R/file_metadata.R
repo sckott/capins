@@ -9,7 +9,7 @@
 #' @examples
 #' library(contentid)
 #' f <- system.file("extdata", "vostok.icecore.co2", package = "contentid")
-#' x <- file(f)
+#' x <- capin(f)
 #' 
 #' # create some metadata file
 #' library(rdflib)
@@ -18,8 +18,8 @@
 #'   subject = "http://www.dajobe.org/",
 #'   predicate = "http://purl.org/dc/elements/1.1/language",
 #'   object = "en")
-#' file_metadata(x, metadata=z)
-file_metadata <- function(x, metadata) {
+#' capin_metadata(x, metadata=z)
+capin_metadata <- function(x, metadata) {
   if (!contentid:::is_hash(x, "hashuri"))
     stop("'x' should be a contentid hash")
   hex <- last(stract(x, contentid:::hex_regex)[[1]])
