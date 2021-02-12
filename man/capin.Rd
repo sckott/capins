@@ -8,6 +8,9 @@ capin(x, meta = NULL)
 }
 \arguments{
 \item{x}{(character) a file path}
+
+\item{meta}{either a file path (character), rdf objet from package
+\pkg{rdflib}, or \code{NULL}}
 }
 \description{
 file

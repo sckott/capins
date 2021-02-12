@@ -1,6 +1,8 @@
 #' file
 #' @export
 #' @param x (character) a file path
+#' @param meta either a file path (character), rdf objet from package
+#' \pkg{rdflib}, or `NULL`
 #' @examples
 #' # a file that's already on the web
 #' x <- system.file("extdata", "vostok.icecore.co2", package = "contentid")
