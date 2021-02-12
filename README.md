@@ -4,6 +4,7 @@ capins
 
 
 [![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
+[![R-check](https://github.com/sckott/capins/workflows/R-check/badge.svg)](https://github.com/sckott/capins/actions?query=workflow%3AR-check)
 
 
 `capins` - Content Addressable Pins
