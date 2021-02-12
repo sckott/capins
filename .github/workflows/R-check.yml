@@ -12,9 +12,9 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        # - { os: windows-latest, r: 'latest'}
-        # - { os: macOS-latest, r: 'latest'}
-        # - { os: macOS-latest, r: 'devel'}
+        - { os: windows-latest, r: 'latest'}
+        - { os: macOS-latest, r: 'latest'}
+        - { os: macOS-latest, r: 'devel'}
         - { os: ubuntu-16.04, r: 'latest', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
         - { os: ubuntu-16.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
 
@@ -44,6 +44,11 @@ jobs:
         with:
           path: ${{ env.R_LIBS_USER }}
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('DESCRIPTION') }}
+
+      - name: Install macos system dependencies
+        if: runner.os == 'macOS'
+        run: |
+          brew install redland
 
       - name: Install system dependencies
         if: runner.os == 'Linux'
