@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xml:base="localhost://">
+  <rdf:Description rdf:about="b0">
+    <ns0:title xmlns:ns0="http://purl.org/dc/elements/1.1/">Dave Beckett's Home Page</ns0:title>
+  </rdf:Description>
   <rdf:Description rdf:about="http://www.dajobe.org/">
     <ns0:language xmlns:ns0="http://purl.org/dc/elements/1.1/">en</ns0:language>
+  </rdf:Description>
+  <rdf:Description rdf:about="b0">
+    <ns0:creator xmlns:ns0="http://purl.org/dc/elements/1.1/">Dave Beckett</ns0:creator>
   </rdf:Description>
 </rdf:RDF>

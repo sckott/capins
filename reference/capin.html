@@ -109,7 +109,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>file</h1>
-    <small class="dont-index">Source: <a href='https://github.com/sckott/capins/blob/master/R/file.R'><code>R/file.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/sckott/capins/blob/master/R/capin.R'><code>R/capin.R</code></a></small>
     <div class="hidden name"><code>capin.Rd</code></div>
     </div>
 
@@ -117,7 +117,7 @@
     <p>file</p>
     </div>
 
-    <pre class="usage"><span class='fu'>capin</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>capin</span><span class='op'>(</span><span class='va'>x</span>, meta <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -126,6 +126,11 @@
       <th>x</th>
       <td><p>(character) a file path</p></td>
     </tr>
+    <tr>
+      <th>meta</th>
+      <td><p>either a file path (character), rdf objet from package
+<span class="pkg">rdflib</span>, or <code>NULL</code></p></td>
+    </tr>
     </table>
 
 
@@ -133,20 +138,35 @@
     <pre class="examples"><div class='input'><span class='co'># a file that's already on the web</span>
 <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"vostok.icecore.co2"</span>, package <span class='op'>=</span> <span class='st'>"contentid"</span><span class='op'>)</span>
 <span class='fu'>capin</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "hash://sha256/9412325831dab22aeebdd674b6eb53ba6b7bdd04bb99a4dbb21ddff646287e37"</div><div class='input'><span class='va'>url</span> <span class='op'>&lt;-</span> <span class='st'>'https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2'</span>
+</div><div class='output co'>#&gt; [1] "hash://sha256/9412325831dab22aeebdd674b6eb53ba6b7bdd04bb99a4dbb21ddff646287e37"
+#&gt; attr(,"class")
+#&gt; [1] "capin"</div><div class='input'><span class='va'>url</span> <span class='op'>&lt;-</span> <span class='st'>'https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2'</span>
 <span class='fu'>capin</span><span class='op'>(</span><span class='va'>url</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "hash://sha256/9412325831dab22aeebdd674b6eb53ba6b7bdd04bb99a4dbb21ddff646287e37"</div><div class='input'>
+</div><div class='output co'>#&gt; [1] "hash://sha256/9412325831dab22aeebdd674b6eb53ba6b7bdd04bb99a4dbb21ddff646287e37"
+#&gt; attr(,"class")
+#&gt; [1] "capin"</div><div class='input'>
 <span class='co'># a file not on the web</span>
 <span class='va'>w</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span>fileext<span class='op'>=</span><span class='st'>".csv"</span><span class='op'>)</span>
 <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>a <span class='op'>=</span> <span class='va'>letters</span>, b <span class='op'>=</span> <span class='va'>LETTERS</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/write.table.html'>write.csv</a></span><span class='op'>(</span><span class='va'>df</span>, file <span class='op'>=</span> <span class='va'>w</span><span class='op'>)</span>
 <span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'>capin</span><span class='op'>(</span><span class='va'>w</span><span class='op'>)</span>
 <span class='va'>res</span>
-</div><div class='output co'>#&gt; [1] "hash://sha256/962879c5f01b0d94e706a99387a87e464e36805580f0c4eb4b830960e7f46392"</div><div class='input'><span class='fu'>contentid</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/contentid/man/query_sources.html'>query_sources</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "hash://sha256/962879c5f01b0d94e706a99387a87e464e36805580f0c4eb4b830960e7f46392"
+#&gt; attr(,"class")
+#&gt; [1] "capin"</div><div class='input'><span class='fu'>contentid</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/contentid/man/query_sources.html'>query_sources</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;                                                                             source
-#&gt; 1 /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpsYV4mk/file6e45bf3c83b.csv
+#&gt; 1 /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpDgml4w/file73b32e2df32.csv
 #&gt;                  date
-#&gt; 1 2021-02-12 21:19:53</div></pre>
+#&gt; 1 2021-02-12 23:31:46</div><div class='input'>
+<span class='co'># associate metadata with the data</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"vostok.icecore.co2"</span>, package <span class='op'>=</span> <span class='st'>"contentid"</span><span class='op'>)</span>
+<span class='va'>m</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"examples/rdf_eg1.rdf"</span>, package <span class='op'>=</span> <span class='st'>"capins"</span><span class='op'>)</span>
+<span class='fu'>capin</span><span class='op'>(</span><span class='va'>x</span>, meta <span class='op'>=</span> <span class='va'>m</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "hash://sha256/9412325831dab22aeebdd674b6eb53ba6b7bdd04bb99a4dbb21ddff646287e37"
+#&gt; attr(,"class")
+#&gt; [1] "capin"
+#&gt; attr(,"metadata")
+#&gt; [1] "/Users/runner/work/_temp/Library/capins/examples/rdf_eg1.rdf"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

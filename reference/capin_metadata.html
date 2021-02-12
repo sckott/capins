@@ -109,7 +109,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>file metadata</h1>
-    <small class="dont-index">Source: <a href='https://github.com/sckott/capins/blob/master/R/file_metadata.R'><code>R/file_metadata.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/sckott/capins/blob/master/R/capin_metadata.R'><code>R/capin_metadata.R</code></a></small>
     <div class="hidden name"><code>capin_metadata.Rd</code></div>
     </div>
 
@@ -117,18 +117,18 @@
     <p>associate metadata with a file</p>
     </div>
 
-    <pre class="usage"><span class='fu'>capin_metadata</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>metadata</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>capin_metadata</span><span class='op'>(</span><span class='va'>metadata</span>, <span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>(character) a file path</p></td>
-    </tr>
-    <tr>
       <th>metadata</th>
       <td><p>metadata something or other</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>(character) a file path</p></td>
     </tr>
     </table>
 
@@ -145,12 +145,31 @@ RDF</p>
 <span class='co'># create some metadata file</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://docs.ropensci.org/rdflib'>rdflib</a></span><span class='op'>)</span>
 <span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://docs.ropensci.org/rdflib/reference/rdf.html'>rdf</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='va'>z</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://docs.ropensci.org/rdflib/reference/rdf_add.html'>rdf_add</a></span><span class='op'>(</span><span class='va'>r</span>,
+<span class='fu'><a href='https://docs.ropensci.org/rdflib/reference/rdf_add.html'>rdf_add</a></span><span class='op'>(</span><span class='va'>r</span>,
   subject <span class='op'>=</span> <span class='st'>"http://www.dajobe.org/"</span>,
   predicate <span class='op'>=</span> <span class='st'>"http://purl.org/dc/elements/1.1/language"</span>,
   object <span class='op'>=</span> <span class='st'>"en"</span><span class='op'>)</span>
-<span class='fu'>capin_metadata</span><span class='op'>(</span><span class='va'>x</span>, metadata<span class='op'>=</span><span class='va'>z</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "9412325831dab22aeebdd674b6eb53ba6b7bdd04bb99a4dbb21ddff646287e37.rdf"</div></pre>
+<span class='fu'><a href='https://docs.ropensci.org/rdflib/reference/rdf_add.html'>rdf_add</a></span><span class='op'>(</span><span class='va'>r</span>,
+  subject <span class='op'>=</span> <span class='st'>"b0"</span>,
+  predicate <span class='op'>=</span> <span class='st'>"http://purl.org/dc/elements/1.1/title"</span>,
+  object <span class='op'>=</span> <span class='st'>"Dave Beckett's Home Page"</span><span class='op'>)</span>
+<span class='fu'><a href='https://docs.ropensci.org/rdflib/reference/rdf_add.html'>rdf_add</a></span><span class='op'>(</span><span class='va'>r</span>,
+  subject <span class='op'>=</span> <span class='st'>"b0"</span>,
+  predicate <span class='op'>=</span> <span class='st'>"http://purl.org/dc/elements/1.1/title"</span>,
+  object <span class='op'>=</span> <span class='st'>"Dave Beckett's Home Page"</span><span class='op'>)</span>
+<span class='fu'><a href='https://docs.ropensci.org/rdflib/reference/rdf_add.html'>rdf_add</a></span><span class='op'>(</span><span class='va'>r</span>,
+  subject <span class='op'>=</span> <span class='st'>"b0"</span>,
+  predicate <span class='op'>=</span> <span class='st'>"http://purl.org/dc/elements/1.1/creator"</span>,
+  object <span class='op'>=</span> <span class='st'>"Dave Beckett"</span><span class='op'>)</span>
+<span class='co'># write metadata to a file</span>
+<span class='va'>mfile</span> <span class='op'>&lt;-</span> <span class='fu'>capin_metadata</span><span class='op'>(</span><span class='va'>x</span>, metadata<span class='op'>=</span><span class='va'>r</span><span class='op'>)</span>
+<span class='co'># read back the metadata file</span>
+<span class='fu'>rdflib</span><span class='fu'>::</span><span class='fu'><a href='https://docs.ropensci.org/rdflib/reference/rdf_parse.html'>rdf_parse</a></span><span class='op'>(</span><span class='va'>mfile</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Total of 3 triples, stored in hashes
+#&gt; -------------------------------
+#&gt; &lt;localhost:///b0&gt; &lt;http://purl.org/dc/elements/1.1/creator&gt; "Dave Beckett" .
+#&gt; &lt;http://www.dajobe.org/&gt; &lt;http://purl.org/dc/elements/1.1/language&gt; "en" .
+#&gt; &lt;localhost:///b0&gt; &lt;http://purl.org/dc/elements/1.1/title&gt; "Dave Beckett's Home Page" .</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
